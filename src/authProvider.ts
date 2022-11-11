@@ -1,11 +1,18 @@
 import { AuthProvider } from "@pankod/refine-core";
+import { axiosInstance } from "axiosInstance";
+import { LoginResponse, UserInfo } from "models/user.model";
 
 export const TOKEN_KEY = "refine-auth";
 
 export const authProvider: AuthProvider = {
-  login: async ({ username, email, password }) => {
-    if ((username || email) && password) {
-      localStorage.setItem(TOKEN_KEY, username);
+  login: async ({ email, password }) => {
+    if (email && password) {
+      const response = await axiosInstance.post<LoginResponse>("auth/sign-in", {
+        email,
+        password,
+      });
+      if (response.status === 200)
+        localStorage.setItem(TOKEN_KEY, response.data.data.accessToken);
       return Promise.resolve();
     }
     return Promise.reject(new Error("username: admin, password: admin"));
@@ -25,13 +32,12 @@ export const authProvider: AuthProvider = {
   },
   getPermissions: () => Promise.resolve(),
   getUserIdentity: async () => {
-    const token = localStorage.getItem(TOKEN_KEY);
-    if (!token) {
+    const user_info = await axiosInstance.get<UserInfo>("auth/token");
+    if (user_info.status === 401) {
       return Promise.reject();
     }
-
     return Promise.resolve({
-      id: 1,
+      user: user_info.data.data,
     });
   },
 };

@@ -16,9 +16,7 @@ import { IconLanguage } from "@tabler/icons";
 import i18n from "i18n";
 
 export const Header: React.FC = () => {
-  const { data: user } = useGetIdentity();
-  const showUserInfo = user && (user.name || user.avatar);
-
+  const { data, isSuccess } = useGetIdentity();
   const changeLanguage = useSetLocale();
   const locale = useGetLocale();
   const currentLocale = locale();
@@ -55,10 +53,14 @@ export const Header: React.FC = () => {
             ))}
           </Menu.Dropdown>
         </Menu>
-        {showUserInfo && (
+        {isSuccess && (
           <Group spacing="xs">
-            <Title order={6}>{user?.name}</Title>
-            <Avatar src={user?.avatar} alt={user?.name} radius="xl" />
+            <Title order={6}>{data?.user?.email}</Title>
+            {/* <Avatar
+              src={user?.data.avatar}
+              alt={user?.data.id.toString()}
+              radius="xl"
+            /> */}
           </Group>
         )}
       </Group>

@@ -1,19 +1,20 @@
 import React from "react";
 import { useRouterContext, TitleProps } from "@pankod/refine-core";
-import { Center } from "@pankod/refine-mantine";
+import { Box } from "@pankod/refine-mantine";
+import { MantineLogo } from "@mantine/ds";
 
 export const Title: React.FC<TitleProps> = ({ collapsed }) => {
   const { Link } = useRouterContext();
 
   return (
     <Link to="/">
-      <Center p="xs">
+      <Box p="xs">
         {collapsed ? (
-          <img src="/refine-collapsed.svg" alt="Refine" />
+          <MantineLogo type="mark" size={30} />
         ) : (
-          <img src="/refine.svg" alt="Refine" width="140px" />
+          <MantineLogo size={30} />
         )}
-      </Center>
+      </Box>
     </Link>
   );
 };

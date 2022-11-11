@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   CanAccess,
   ITreeMenu,
@@ -61,17 +61,17 @@ export const Sider: typeof DefaultSider = ({ render }) => {
   const commonNavLinkStyles: Styles<NavLinkStylesNames, NavLinkStylesParams> = {
     root: {
       display: "flex",
-      color: "white",
+      color: "#495566",
       fontWeight: 500,
       "&:hover": {
         backgroundColor: "unset",
       },
       "&[data-active]": {
-        backgroundColor: "#ffffff1a",
-        color: "white",
+        backgroundColor: "#b4aeae1a",
+        color: "#495566",
         fontWeight: 700,
         "&:hover": {
-          backgroundColor: "#ffffff1a",
+          backgroundColor: "#b4aeae1a",
         },
       },
       justifyContent: collapsed && !opened ? "center" : "flex-start",
@@ -191,14 +191,14 @@ export const Sider: typeof DefaultSider = ({ render }) => {
       <MediaQuery largerThan="md" styles={{ display: "none" }}>
         <Box sx={{ position: "fixed", top: 64, left: 0, zIndex: 1199 }}>
           <ActionIcon
-            color="white"
+            color="#495566"
             size={36}
             sx={{
               borderRadius: "0 6px 6px 0",
-              backgroundColor: "#2A132E",
-              color: "white",
+              backgroundColor: "#f8f9fa",
+              color: "#495566",
               "&:hover": {
-                backgroundColor: "#2A132E",
+                backgroundColor: "#f8f9fa",
               },
             }}
             onClick={() => setOpened((prev) => !prev)}
@@ -218,7 +218,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
           styles={{
             drawer: {
               overflow: "hidden",
-              backgroundColor: "#2A132E",
+              backgroundColor: "#f8f9fa",
             },
           }}
         >
@@ -246,7 +246,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
           sx={{
             overflow: "hidden",
             transition: "width 200ms ease, min-width 200ms ease",
-            backgroundColor: "#2A132E",
+            backgroundColor: "#f8f9fa",
             position: "fixed",
             top: 0,
             height: "100vh",
@@ -263,7 +263,7 @@ export const Sider: typeof DefaultSider = ({ render }) => {
               sx={{
                 background: "rgba(0,0,0,.5)",
                 borderRadius: 0,
-                borderTop: "1px solid #ffffff1a",
+                borderTop: "1px solid #b4aeae1a",
               }}
               size="md"
               variant="gradient"

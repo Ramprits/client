@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Refine } from "@pankod/refine-core";
 import {
   NotificationsProvider,
@@ -19,12 +17,14 @@ import { useTranslation } from "react-i18next";
 import { Title, Sider, Layout, Header } from "components/layout";
 import { OffLayoutArea } from "components/offLayoutArea";
 import { authProvider } from "./authProvider";
+import HomePage from "pages/home/home.page";
+import { IconHome2 } from "@tabler/icons";
+import { API_URL, axiosInstance } from "./axiosInstance";
 
 function App() {
   const { t, i18n } = useTranslation();
 
-  const API_URL = "https://api.nestjsx-crud.refine.dev";
-  const dataProvider = nestjsxCrudDataProvider(API_URL);
+  const dataProvider = nestjsxCrudDataProvider(API_URL, axiosInstance);
 
   const i18nProvider = {
     translate: (key: string, params: object) => t(key, params),
@@ -51,6 +51,16 @@ function App() {
             Header={Header}
             OffLayoutArea={OffLayoutArea}
             i18nProvider={i18nProvider}
+            resources={[
+              {
+                name: "home",
+                icon: <IconHome2 size={20} />,
+                options: {
+                  label: "Home",
+                },
+                list: HomePage,
+              },
+            ]}
           />
         </RefineKbarProvider>
       </NotificationsProvider>
